@@ -1,5 +1,10 @@
 import { useReducer } from "react";
 
+import CounterContext from "./CounterContext";
+
+import Display from "./components/Display";
+import Button from "./components/Button";
+
 const counterReducer = (state, action) => {
   switch (action.type) {
     case "INC":
@@ -15,15 +20,17 @@ const counterReducer = (state, action) => {
 };
 
 const App = () => {
-  const [counter, dispatchCounter] = useReducer(counterReducer, 0);
+  const [counter, counterDispatch] = useReducer(counterReducer, 0);
 
   return (
-    <div>
-      <p>{counter}</p>
-      <button onClick={() => dispatchCounter({ type: "DEC" })}>-</button>
-      <button onClick={() => dispatchCounter({ type: "RES" })}>reset</button>
-      <button onClick={() => dispatchCounter({ type: "INC" })}>+</button>
-    </div>
+    <CounterContext.Provider value={[counter, counterDispatch]}>
+      <div>
+        <Display />
+        <Button label="-" type="DEC" />
+        <Button label="reset" type="RES" />
+        <Button label="+" type="INC" />
+      </div>
+    </CounterContext.Provider>
   );
 };
 
