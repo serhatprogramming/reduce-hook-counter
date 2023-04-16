@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useContext } from "react";
 
 const counterReducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +24,16 @@ export const CounterContextProvider = (props) => {
       {props.children}
     </CounterContext.Provider>
   );
+};
+
+export const useCounterValue = () => {
+  const counterAndDispatch = useContext(CounterContext);
+  return counterAndDispatch[0];
+};
+
+export const useDispatch = () => {
+  const counterAndDispatch = useContext(CounterContext);
+  return counterAndDispatch[1];
 };
 
 export default CounterContext;
