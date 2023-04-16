@@ -31,7 +31,7 @@ export const useCounterValue = () => {
   return counterAndDispatch[0];
 };
 
-export const useDispatch = () => {
+export const useCounterDispatch = () => {
   const counterAndDispatch = useContext(CounterContext);
   return counterAndDispatch[1];
 };
